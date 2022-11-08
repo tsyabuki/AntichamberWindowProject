@@ -97,9 +97,9 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: bd48f133a9373424e807651f1993dc7a, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 854559534932676019}
   - component: {fileID: 1865498564495598607}
   - component: {fileID: 7674084943259427633}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RenderPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
