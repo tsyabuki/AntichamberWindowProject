@@ -1,0 +1,2 @@
+Used Code:
+Used a Brackey's Shader for screen cutouts in order to get the window visuals to look correct
