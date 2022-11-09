@@ -414,6 +414,7 @@ MonoBehaviour:
   mainCameraTransform: {fileID: 4747117930798147160}
   standTrigger: {fileID: 615615561}
   lookTrigger: {fileID: 6377476063511562654}
+  displayPlane: {fileID: 2968221181964525702}
   windowCamera: {fileID: 2559625856180719319}
 --- !u!1 &4749965022319393766
 GameObject:

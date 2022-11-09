@@ -5,7 +5,7 @@ using UnityEngine;
 public class TeleportWindow : MonoBehaviour
 {
     [Header("Settings")]
-    public bool canTeleport = true; 
+    public bool canTeleport = true;
     [Space]
     [Header("References")]
     [SerializeField] private TeleportWindow otherWindow;
@@ -13,6 +13,7 @@ public class TeleportWindow : MonoBehaviour
     [SerializeField] private Transform mainCameraTransform;
     [SerializeField] private WindowStandingTrigger standTrigger;
     [SerializeField] private WindowLookTrigger lookTrigger;
+    [SerializeField] private GameObject displayPlane;
     public Camera windowCamera;
 
     private bool isVisible;
@@ -55,10 +56,13 @@ public class TeleportWindow : MonoBehaviour
     private void Update()
     {
         setCameraParity();
+    }
 
+    private void FixedUpdate()
+    {
         bool isTeleport = checkTeleportConditions();
         //If all teleportation conditions are met, teleport
-        if(isTeleport)
+        if (isTeleport)
         {
             teleport();
         }
@@ -80,7 +84,7 @@ public class TeleportWindow : MonoBehaviour
 
     private void getDeltas()
     {
-        playerPositionDelta = playerTransform.position - transform.position;
+        playerPositionDelta = transform.InverseTransformPoint(playerTransform.position);
         cameraPositionDelta = mainCameraTransform.position - transform.position;
         windowRotationDelta = transform.rotation.eulerAngles - otherWindow.transform.rotation.eulerAngles;
     }
@@ -88,8 +92,10 @@ public class TeleportWindow : MonoBehaviour
     //Returns true if all teleportation conditions are met
     private bool checkTeleportConditions()
     {
-        if(canTeleport && standTrigger.isPlayerIn && lookTrigger.playerIsLookingFull)
+        if (canTeleport && standTrigger.isPlayerIn && lookTrigger.playerIsLookingFull)
         {
+            standTrigger.isPlayerIn = false;
+            lookTrigger.playerIsLookingFull = false;
             return true;
         }
         return false;
@@ -98,6 +104,21 @@ public class TeleportWindow : MonoBehaviour
     //Teleportation functionality
     private void teleport()
     {
-        Debug.Log("Teleport");
+        Debug.Log("Teleporting from " + gameObject.name);
+
+        //Disable teleportation on the other window
+        otherWindow.canTeleport = false;
+
+        //Disable the other window's display plane
+        otherWindow.displayPlane.SetActive(false);
+
+        //Set the new player position to the local position based on the player position delta
+        Vector3 newPlayerPosition = otherWindow.transform.TransformPoint(playerPositionDelta);
+        playerTransform.position = newPlayerPosition;
+
+        //Rotate the player based on the difference in rotation
+        playerTransform.Rotate(windowRotationDelta);
+
+        Debug.Log("Teleport Complete");
     }
 }
