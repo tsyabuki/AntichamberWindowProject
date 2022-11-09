@@ -145,6 +145,10 @@ public class TeleportWindow : MonoBehaviour
     //Checks if the player has walked past the current window
     private bool checkPastWindow()
     {
+        if(playerPositionDelta.z < 0)
+        {
+            return true;
+        }
         return false;
     }
 }
