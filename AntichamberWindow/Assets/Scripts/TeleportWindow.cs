@@ -13,6 +13,7 @@ public class TeleportWindow : MonoBehaviour
     [SerializeField] private Transform mainCameraTransform;
     [SerializeField] private WindowStandingTrigger standTrigger;
     [SerializeField] private WindowLookTrigger lookTrigger;
+    [SerializeField] private WindowVisbilityTrigger visibilityTrigger;
     [SerializeField] private GameObject displayPlane;
     public Camera windowCamera;
 
@@ -51,11 +52,32 @@ public class TeleportWindow : MonoBehaviour
         {
             Debug.Log("Could not find a standing trigger reference in " + gameObject.name + ".");
         }
+
+        if (visibilityTrigger == null)
+        {
+            Debug.Log("Could not find a visibility trigger reference in " + gameObject.name + ".");
+        }
+
+        if (lookTrigger == null)
+        {
+            Debug.Log("Could not find a look trigger reference in " + gameObject.name + ".");
+        }
     }
 
     private void Update()
     {
+        //Get the relative differences between objects
+        getDeltas();
+
+        //Create parity between the camera on the other side of the window
         setCameraParity();
+
+        //Check the conditions for ren-enabling itself after the player has teleported to this window
+        if(!canTeleport && (!visibilityTrigger.isVisible || checkPastWindow()))
+        {
+            canTeleport = true;
+            displayPlane.SetActive(true);
+        }
     }
 
     private void FixedUpdate()
@@ -71,9 +93,6 @@ public class TeleportWindow : MonoBehaviour
     //Creates relative parity between this camera and the main camera relative to the opposite window
     private void setCameraParity()
     {
-        //Get the relative differences between objects
-        getDeltas();
-
         //Set the other window's camera position based on the relative position
         otherWindow.windowCamera.transform.localPosition = cameraPositionDelta;
         //Sets the other window's camera rotation based on the player's camera
@@ -104,7 +123,7 @@ public class TeleportWindow : MonoBehaviour
     //Teleportation functionality
     private void teleport()
     {
-        Debug.Log("Teleporting from " + gameObject.name);
+        //Debug.Log("Teleporting from " + gameObject.name);
 
         //Disable teleportation on the other window
         otherWindow.canTeleport = false;
@@ -119,6 +138,12 @@ public class TeleportWindow : MonoBehaviour
         //Rotate the player based on the difference in rotation
         playerTransform.Rotate(windowRotationDelta);
 
-        Debug.Log("Teleport Complete");
+        //Debug.Log("Teleport Complete");
+    }
+
+    //Checks if the player has walked past the current window
+    private bool checkPastWindow()
+    {
+        return false;
     }
 }
