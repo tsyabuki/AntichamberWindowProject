@@ -13,8 +13,8 @@ TagManager:
   - UI
   - CollisionObject
   - WindowCamera
-  - 
-  - 
+  - LookTrigger
+  - VisibilityTrigger
   - 
   - 
   - 
