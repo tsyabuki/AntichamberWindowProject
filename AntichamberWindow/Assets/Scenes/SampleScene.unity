@@ -956,7 +956,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 65ac592e443c1e7488d203df4f4a1185, type: 2}
+      objectReference: {fileID: 2100000, guid: cf90c8ee1d89d374895cd600b0654020, type: 2}
     - target: {fileID: 1985414948151267255, guid: c762f689761e6de4786e3d94fafa9145,
         type: 3}
       propertyPath: m_Layer
@@ -966,7 +966,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 8400000, guid: bd48f133a9373424e807651f1993dc7a, type: 2}
+      objectReference: {fileID: 8400000, guid: 4951e6c8d721ab04b90a44ede7f66e93, type: 2}
     - target: {fileID: 2559625856180719319, guid: c762f689761e6de4786e3d94fafa9145,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
