@@ -94,17 +94,18 @@ public class TeleportWindow : MonoBehaviour
     private void setCameraParity()
     {
         //Set the other window's camera position based on the relative position
-        otherWindow.windowCamera.transform.localPosition = cameraPositionDelta;
+        Vector3 newCameraPosition = otherWindow.transform.TransformPoint(cameraPositionDelta);
+        otherWindow.windowCamera.transform.position = newCameraPosition;
         //Sets the other window's camera rotation based on the player's camera
         Quaternion newOtherCameraRotation = mainCameraTransform.transform.rotation;
-        newOtherCameraRotation.eulerAngles += windowRotationDelta;
+        newOtherCameraRotation.eulerAngles -= windowRotationDelta;
         otherWindow.windowCamera.transform.rotation = newOtherCameraRotation;
     }
 
     private void getDeltas()
     {
         playerPositionDelta = transform.InverseTransformPoint(playerTransform.position);
-        cameraPositionDelta = mainCameraTransform.position - transform.position;
+        cameraPositionDelta = transform.InverseTransformPoint(mainCameraTransform.position);
         windowRotationDelta = transform.rotation.eulerAngles - otherWindow.transform.rotation.eulerAngles;
     }
 
@@ -136,7 +137,7 @@ public class TeleportWindow : MonoBehaviour
         playerTransform.position = newPlayerPosition;
 
         //Rotate the player based on the difference in rotation
-        playerTransform.Rotate(windowRotationDelta);
+        playerTransform.Rotate(-windowRotationDelta);
 
         //Debug.Log("Teleport Complete");
     }

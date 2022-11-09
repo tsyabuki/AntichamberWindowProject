@@ -33,6 +33,6 @@ public class WindowTextureManager : MonoBehaviour
         }
 
         cameraB.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
-        cameraMatB.mainTexture = cameraA.targetTexture;
+        cameraMatB.mainTexture = cameraB.targetTexture;
     }
 }
