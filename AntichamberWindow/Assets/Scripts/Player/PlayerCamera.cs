@@ -33,7 +33,7 @@ public class PlayerCamera : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            toggleMouseMove();
+            //toggleMouseMove();
         }
 
         if(canMoveMouse)
