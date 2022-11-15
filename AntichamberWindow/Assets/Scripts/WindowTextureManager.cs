@@ -24,7 +24,7 @@ public class WindowTextureManager : MonoBehaviour
             cameraA.targetTexture.Release();
         }
 
-        cameraA.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        cameraA.targetTexture = new RenderTexture(Screen.width, Screen.height, 32, UnityEngine.Experimental.Rendering.DefaultFormat.HDR);
         cameraMatA.mainTexture = cameraA.targetTexture;
 
         if (cameraB.targetTexture != null)
@@ -32,7 +32,7 @@ public class WindowTextureManager : MonoBehaviour
             cameraB.targetTexture.Release();
         }
 
-        cameraB.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        cameraB.targetTexture = new RenderTexture(Screen.width, Screen.height, 32, UnityEngine.Experimental.Rendering.DefaultFormat.HDR);
         cameraMatB.mainTexture = cameraB.targetTexture;
     }
 }
